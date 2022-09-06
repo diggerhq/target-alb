@@ -3,7 +3,7 @@ locals {
   alb_name = "{{ alb_name }}"
   lb_sg_name = "{{ alb_name }}-sg"
   internal = false
-  subnet_ids = ""
+  subnet_ids = var.public_subnets
   lb_port = "80"
   lb_protocol = "HTTP"
   lb_ssl_protocol = "HTTPS"
