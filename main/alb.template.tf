@@ -148,6 +148,7 @@ resource "aws_alb_listener" "http" {
   }
 }
 
+/*
 resource "aws_lb_listener" "https" {
   count = (local.lb_ssl_certificate_arn==null && local.dggr_acm_certificate_arn==null) ? 0 : 1
   load_balancer_arn = aws_alb.main.arn
@@ -166,12 +167,13 @@ resource "aws_lb_listener" "https" {
   }
 }
 
+
 resource "aws_lb_listener_certificate" "lb_listener_cert" {
    count = (local.lb_ssl_certificate_arn==null && local.dggr_acm_certificate_arn==null) ? 0 : 1
    listener_arn = aws_lb_listener.https[0].arn
    certificate_arn   = local.lb_ssl_certificate_arn==null ? local.dggr_acm_certificate_arn : local.lb_ssl_certificate_arn
 }
-
+*/
 # The load balancer DNS name
 output "lb_dns" {
   value = aws_alb.main.dns_name
@@ -185,10 +187,11 @@ output "lb_http_listener_arn" {
   value = try(aws_alb_listener.http.arn, null)
 }
 
+/*
 output "lb_https_listener_arn" {
   value = try(aws_lb_listener.https[0].arn, null)
 }
-
+*/
 output "lb_zone_id" {
   value = aws_alb.main.zone_id
 }
