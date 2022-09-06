@@ -2,7 +2,7 @@
 locals {
   alb_name = "{{ alb_name }}"
   lb_sg_name = "{{ alb_name }}-sg"
-  internal = "{{ internal }}"
+  internal = false
   subnet_ids = ""
   lb_port = "80"
   lb_protocol = "HTTP"
