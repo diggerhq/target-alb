@@ -15,8 +15,8 @@ locals {
   health_check_interval = "30"
   health_check_timeout = "30"
   lb_access_logs_expiration_days = "7"
-  lb_ssl_certificate_arn = "{{ lb_ssl_certificate_arn }}"
-  dggr_acm_certificate_arn = "{{ dggr_acm_certificate_arn }}"
+  lb_ssl_certificate_arn = null
+  dggr_acm_certificate_arn = null
   vpc_id = data.aws_vpc.vpc.id
 }
 
