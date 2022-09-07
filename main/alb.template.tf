@@ -28,7 +28,7 @@ resource "aws_security_group" "lb_sg" {
   tags = var.tags
 }
 
-resource "aws_security_group_rule" "nsg_lb_egress_rule" {
+resource "aws_security_group_rule" "lb_ingress_rule" {
   description              = "Connection to ALB"
   type                     = "ingress"
   from_port                = local.lb_port
@@ -37,7 +37,6 @@ resource "aws_security_group_rule" "nsg_lb_egress_rule" {
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id        = aws_security_group.lb_sg.id
 }
-
 
 resource "aws_alb" "main" {
   name = local.alb_name
