@@ -30,7 +30,7 @@ resource "aws_security_group" "lb_sg" {
 
 resource "aws_security_group_rule" "nsg_lb_egress_rule" {
   description              = "Connection to ALB"
-  type                     = "egress"
+  type                     = "ingress"
   from_port                = local.lb_port
   to_port                  = local.lb_port
   protocol                 = "tcp"
