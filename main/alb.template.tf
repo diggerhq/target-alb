@@ -1,23 +1,23 @@
 
 locals {
-  alb_name = "{{ alb_name }}"
-  lb_sg_name = "{{ alb_name }}-sg"
-  internal = false
-  subnet_ids = var.public_subnets
-  lb_port = "80"
-  lb_protocol = "HTTP"
-  lb_ssl_protocol = "HTTPS"
-  lb_ssl_port = "443"
-  deregistration_delay = "30"
-  health_check_enabled = true
-  health_check= "/"
-  health_check_matcher = "200-499"
-  health_check_interval = "30"
-  health_check_timeout = "30"
+  alb_name                       = "{{ alb_name }}"
+  lb_sg_name                     = "{{ alb_name }}-sg"
+  internal                       = false
+  subnet_ids                     = var.public_subnets
+  lb_port                        = "80"
+  lb_protocol                    = "HTTP"
+  lb_ssl_protocol                = "HTTPS"
+  lb_ssl_port                    = "443"
+  deregistration_delay           = "30"
+  health_check_enabled           = true
+  health_check                   = "/"
+  health_check_matcher           = "200-499"
+  health_check_interval          = "30"
+  health_check_timeout           = "30"
   lb_access_logs_expiration_days = "7"
-  lb_ssl_certificate_arn = null
-  dggr_acm_certificate_arn = null
-  vpc_id = data.aws_vpc.vpc.id
+  lb_ssl_certificate_arn         = null
+  dggr_acm_certificate_arn       = null
+  vpc_id                         = data.aws_vpc.vpc.id
 }
 
 resource "aws_security_group" "lb_sg" {
@@ -29,14 +29,25 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_security_group_rule" "lb_ingress_rule" {
-  description              = "Connection to ALB"
-  type                     = "ingress"
-  from_port                = local.lb_port
-  to_port                  = local.lb_port
-  protocol                 = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id        = aws_security_group.lb_sg.id
+  description       = "Connection to ALB"
+  type              = "ingress"
+  from_port         = local.lb_port
+  to_port           = local.lb_port
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.lb_sg.id
 }
+
+resource "aws_security_group_rule" "lb_egress_rule" {
+  description       = "Connection to ALB"
+  type              = "egress"
+  from_port         = local.lb_port
+  to_port           = local.lb_port
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.lb_sg.id
+}
+
 
 resource "aws_alb" "main" {
   name = local.alb_name
