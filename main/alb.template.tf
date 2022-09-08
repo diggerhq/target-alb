@@ -41,8 +41,8 @@ resource "aws_security_group_rule" "lb_ingress_rule" {
 resource "aws_security_group_rule" "lb_egress_rule" {
   description       = "Connection to ALB"
   type              = "egress"
-  from_port         = local.lb_port
-  to_port           = local.lb_port
+  from_port         = 0
+  to_port           = 0
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.lb_sg.id
