@@ -13,13 +13,6 @@ variable "tags" {
   type = map(string)
 }
 
-# The application's name
-variable "app" {
-}
-
-# ecs derived variable names
-variable "ecs_cluster_name" {}
-
 variable "alarms_sns_topic_arn" {}
 
 variable "monitoring_enabled" {}
